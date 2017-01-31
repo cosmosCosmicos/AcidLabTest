@@ -1,0 +1,54 @@
+﻿@model WorldIndicator.Models.Country
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>AcidLab Test</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datepicker")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/css")
+
+</head>
+<body>
+
+    @using (Html.BeginForm("", "", FormMethod.Post))
+    {
+
+        //var items = new List<SelectListItem>()
+        //    {
+        //        new SelectListItem() { Text = "Item 1", Value = "#" },
+        //        new SelectListItem() { Text = "Item 2", Value = "#" },
+        //    };
+        SelectList list = ViewBag.list;
+
+        <form role="form" action="" method="post">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.Label("Country :", new { @class = "", style = "font-size:medium" })
+                    <div class="input-group">
+                        @Html.DropDownListFor(Model => Model.CountryCode, list, new { @class = "form-control", style = "width:200px" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Start Date :", new { @class = "", style = "font-size:medium" })
+                    <div class="input-group">
+                        <input id="StartDate" class="datepicker" size="46" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("End Date :", new { @class = "", style = "font-size:medium" })
+                    <div class="input-group">
+                        <input id="EndDate" class="datepicker" size="46" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="Process" class="btn btn-default">Process</button>
+                </div>
+            </div>
+        </form>
+    }
+</body>
+</html>
+
+
