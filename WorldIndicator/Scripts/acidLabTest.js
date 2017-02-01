@@ -9,6 +9,8 @@
         endDate: new Date(),
     });
 
+   
+
     $("#Process").click(function () {
         var countrycode = $("#CountryCode option:selected").val();
         var startDate = $("#StartDate").val().trim();
