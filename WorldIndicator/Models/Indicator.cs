@@ -11,6 +11,8 @@ namespace WorldIndicator.Models
         public string CountryName { set; get; }
         public string Rate { set; get; }
         public string Year { set; get; }
+        public string Description { set; get; }
+
 
         public List<Indicator> getBirthRateIndicator(string countryCode, string startYear, string endYear)
         {

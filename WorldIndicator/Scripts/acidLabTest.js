@@ -24,10 +24,15 @@
                 alert(response.responseText);
             },
             success: function (response) {
-                alert(response);
-            }
-
-        });
+                var trHTML = '';
+                $('#location td').remove()
+                $.each(response, function(i, item) {
+                    trHTML += '<tr><td>' + item.CountryName + '</td><td>' + item.Rate + '</td><td>' + item.Year + '</td><td>' + item.Description + '</td></tr>';
+                    
+                })
+                $('#location').append(trHTML);
+            }    
+        });      
 
     });
 });
