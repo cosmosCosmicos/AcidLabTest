@@ -17,14 +17,30 @@ namespace WorldIndicator.Models
         public List<Indicator> getBirthRateIndicator(string countryCode, string startYear, string endYear)
         {
             List<Indicator> listCountries = new List<Indicator>();
-            listCountries = Connection.GetListData<Indicator>(ConnectionNameEnum.AdmisionTest, "getBirthRateIndicator", new { @countryCode = countryCode, @startYear = startYear, @endYear = endYear });
+            if (countryCode == "All") 
+            {
+                listCountries = Connection.GetListData<Indicator>(ConnectionNameEnum.AdmisionTest, "getbirthrateIndicatorByAllCountries", new { @startYear = startYear, @endYear = endYear });
+            }
+            else
+            {
+                listCountries = Connection.GetListData<Indicator>(ConnectionNameEnum.AdmisionTest, "getBirthRateIndicator", new { @countryCode = countryCode, @startYear = startYear, @endYear = endYear });
+            }
+            
             return listCountries;
         }
 
         public List<Indicator> getMortalityIndicator(string countryCode, string startYear, string endYear)
         {
             List<Indicator> listCountries = new List<Indicator>();
-            listCountries = Connection.GetListData<Indicator>(ConnectionNameEnum.AdmisionTest, "getMortalityIndicator", new { @countryCode = countryCode, @startYear = startYear, @endYear = endYear });
+            if (countryCode == "All")
+            {
+                listCountries = Connection.GetListData<Indicator>(ConnectionNameEnum.AdmisionTest, "getmortalityindicatorbyallcountries", new { @startYear = startYear, @endYear = endYear });
+            }
+            else
+            {
+                listCountries = Connection.GetListData<Indicator>(ConnectionNameEnum.AdmisionTest, "getMortalityIndicator", new { @countryCode = countryCode, @startYear = startYear, @endYear = endYear });
+            }
+            
             return listCountries;
         }
 
@@ -33,11 +49,13 @@ namespace WorldIndicator.Models
             List<Indicator> totalList = new List<Indicator>();
             List<Indicator> birtRate = new List<Indicator>();
             List<Indicator> mortality = new List<Indicator>();
-            Indicator indicator = new Indicator();
+            Indicator indicator = new Indicator();            
             birtRate = indicator.getBirthRateIndicator(countryCode, startYear, endYear);
             mortality = indicator.getMortalityIndicator(countryCode, startYear, endYear);
-            totalList.AddRange(birtRate);
-            totalList.AddRange(mortality);
+            if (birtRate != null)            
+                totalList.AddRange(birtRate);                            
+            if(  mortality != null)
+                totalList.AddRange(mortality);
             return totalList;
         }
 
